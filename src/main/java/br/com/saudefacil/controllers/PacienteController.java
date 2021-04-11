@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
@@ -17,7 +19,8 @@ import br.com.saudefacil.dao.PacienteDAO;
 import br.com.saudefacil.exception.PacienteException;
 import br.com.saudefacil.models.Paciente;
 
-
+@RestController
+@RequestMapping("/api/pacientes")
 public class PacienteController {
 	private static final int PACIENTE_DESATIVADO = 0;
 	private PacienteDAO pacienteDAO = new PacienteDAO();
@@ -49,7 +52,7 @@ public class PacienteController {
 		return pacienteDAO.getPacientes();
 	}
 	
-	@PostMapping(path = "/new/paciente")
+	@PostMapping(path = "/new")
 	public ResponseEntity<Paciente> cadastrar(@RequestBody Paciente paciente, BindingResult result) {
 		
 		this.create(paciente);
